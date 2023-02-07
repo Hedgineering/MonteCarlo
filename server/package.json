@@ -1,12 +1,43 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
+  "name": "MonteCarlo Simulator Server",
+  "version": "0.0.1",
+  "description": "A back end math engine for running Monte Carlo simulations for calculating various potential outcomes of input trading strategies.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
-  "author": "Rahul Hegde <rahul.a.hegde@gmail.com>",
-  "license": "MIT"
+  "author": {
+    "name": "Hedgineering",
+    "email": "rhegde.hrahul@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Rahul Hegde",
+      "email": "rhegde.hrahul@gmail.com"
+    },
+    {
+      "name": "Daniel Chen",
+      "email": "chendaniel03@gmail.com"
+    },
+    {
+      "name": "Sahana Ranganathan",
+      "email": "sahanaranga@gmail.com"
+    },
+    {
+      "name": "Pratyoy Biswas",
+      "email": "pratyoybiswas00@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "date-fns": "^2.29.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
 }
