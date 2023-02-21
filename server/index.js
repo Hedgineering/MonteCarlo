@@ -46,6 +46,7 @@ app.use(express.json());
 // Non-Protected Endpoints ---------
 app.use("/", require("./routes/Root"));
 app.use("/api/sum", require("./routes/api/Sums"));
+app.use("/api/stock", require("./routes/api/Stocks"));
 
 // Catch all for 404
 app.all("*", (req, res) => {

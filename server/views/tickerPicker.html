@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ticker Picker</title>
+</head>
+<body>
+  <h1>Please Choose Your Stock (and use a valid ticker symbol)</h1>
+  <form>
+    <label for="ticker">Ticker:</label>
+    <input type="text" name="ticker" id="ticker" />
+    <input type="submit" value="Submit" />
+  </form>
+  <script>
+    const form = document.querySelector("form");
+    const ticker = document.getElementById("ticker");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      window.location.replace(`/api/stock/${ticker.value}`)
+    })
+  </script>
+</body>
+</html>
