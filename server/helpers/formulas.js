@@ -1,5 +1,9 @@
-// Returns array of periodic daily returns given list of daily prices
-// periodic daily return = ln(day's price/previous day's price)
+/**
+ * Returns list of periodic daily returns given list of daily prices.
+ * 
+ * @param {Array} dailyPrices Array of closing price on daily time frame.
+ * @returns {Array} Periodic Daily Returns from index 1 to n.
+ */
 function periodicDailyReturns(dailyPrices) {
     const result = [];
     for (let i = 1; i < dailyPrices.length; i++) {
@@ -8,7 +12,12 @@ function periodicDailyReturns(dailyPrices) {
     return result;
 }
 
-// Returns average of array
+/**
+ * Average of list values.
+ * 
+ * @param {Array} arr Any list of numerical values.
+ * @returns {number} Average of list values.
+ */
 function average(arr) {
     let sum = 0;
     for (n in arr) {
@@ -17,7 +26,12 @@ function average(arr) {
     return sum / arr.length;
 }
 
-// Returns population variance of array
+/**
+ * Population Variance of list values.
+ * 
+ * @param {Array} arr Any list of numerical values.
+ * @returns {number} Variance of list values.
+ */
 function popVariance(arr) {
     const avg = average(arr);
     let sum = 0;
@@ -27,13 +41,22 @@ function popVariance(arr) {
     return sum / arr.length;
 }
 
-// Retuns population std dev (= sqrt(pop var))
+/**
+ * Population Standard Deviation of list values.
+ * 
+ * @param {Array} arr Any list of numerical values.
+ * @returns {number} Standard deviation of list values.
+ */
 function popStdDev(arr) {
     return popVariance(arr) ** 0.5;
 }
 
-// Returns drift 
-// Drift = average daily return - (daily return variance)/2
+/**
+ * Gets drift value from array historical price data.
+ * 
+ * @param {Array} dailyPrices Array of closing price on daily time frame.
+ * @returns {number} Returns drift value.
+ */
 function drift(dailyPrices) {
     const periodicReturns = periodicDailyReturns(dailyPrices);
     const avg = average(periodicReturns);
@@ -42,15 +65,23 @@ function drift(dailyPrices) {
     return avg - varp / 2;
 }
 
-// get random value
-// random = std dev * invnorm(random value between 0 and 1)
+/**
+ * Returns normally-distributed random value.
+ * 
+ * @param {Array} dailyPrices Array of closing price on daily time frame.
+ * @returns {number} Random value based on standard deviation of dailyPrices.
+ */
 function rand(dailyPrices) {
     const stddev = popStdDev(periodicDailyReturns(dailyPrices));
     return stddev * NormSInv(Math.random());
 }
 
-// Get z value from given p value
-// https://stackoverflow.com/questions/8816729/javascript-equivalent-for-inverse-normal-function-eg-excels-normsinv-or-nor
+/**
+ *  https://stackoverflow.com/questions/8816729/javascript-equivalent-for-inverse-normal-function-eg-excels-normsinv-or-nor.
+ * 
+ * @param {*} p Value in [0, 1].
+ * @returns {number} z-value from given p.
+ */
 function NormSInv(p) {
     let a1 = -39.6968302866538, a2 = 220.946098424521, a3 = -275.928510446969;
     let a4 = 138.357751867269, a5 = -30.6647980661472, a6 = 2.50662827745924;
@@ -84,12 +115,27 @@ function NormSInv(p) {
     return retVal;
 }
 
-// Calculate following day's price
-// Next price = today's price * e^(drift + random)
+/**
+ * Generate next day's price given previous daily prices.
+ * 
+ * @param {Array} dailyPrices Array of closing price on daily time frame.
+ * @returns {number} Simulated value of next day's price.
+ */
 function nextPrice(dailyPrices) {
     const todayPrice = dailyPrices[dailyPrices.length - 1];
     const driftValue = drift;
     const randomValue = rand(dailyPrices);
 
     return todayPrice * Math.exp(driftValue + randomValue);
+}
+
+module.exports = {
+    periodicDailyReturns,
+    average,
+    popVariance,
+    popStdDev,
+    drift,
+    rand,
+    NormSInv,
+    nextPrice
 }
