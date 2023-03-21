@@ -73,16 +73,16 @@ function drift(dailyPrices) {
  */
 function rand(dailyPrices) {
     const stddev = popStdDev(periodicDailyReturns(dailyPrices));
-    return stddev * NormSInv(Math.random());
+    return stddev * normSInv(Math.random());
 }
 
 /**
- *  https://stackoverflow.com/questions/8816729/javascript-equivalent-for-inverse-normal-function-eg-excels-normsinv-or-nor.
+ *  https://stackoverflow.com/questions/8816729/javascript-equivalent-for-inverse-normal-function-eg-excels-normSInv-or-nor.
  * 
  * @param {*} p Value in [0, 1].
  * @returns {number} z-value from given p.
  */
-function NormSInv(p) {
+function normSInv(p) {
     let a1 = -39.6968302866538, a2 = 220.946098424521, a3 = -275.928510446969;
     let a4 = 138.357751867269, a5 = -30.6647980661472, a6 = 2.50662827745924;
     let b1 = -54.4760987982241, b2 = 161.585836858041, b3 = -155.698979859887;
@@ -136,6 +136,6 @@ module.exports = {
     popStdDev,
     drift,
     rand,
-    NormSInv,
+    normSInv,
     nextPrice
 }
