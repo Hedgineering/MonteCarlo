@@ -17,6 +17,7 @@ function getMarketData(ticker,dataType) {
         .then(users => {
             console.log(users);
         });
-
-
     }
+module.exports = {
+    getMarketData
+}
