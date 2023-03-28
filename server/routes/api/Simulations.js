@@ -4,6 +4,6 @@ const {
     postSimulations
 } = require("../../controllers/SimulationsController.js");
 
-router.route("/Simulations").post(postSimulations);
+router.route("/").post(postSimulations);
 
 module.exports = router;

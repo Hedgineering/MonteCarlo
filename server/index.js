@@ -47,6 +47,7 @@ app.use(express.json());
 app.use("/", require("./routes/Root"));
 app.use("/api/sum", require("./routes/api/Sums"));
 app.use("/api/stock", require("./routes/api/Stocks"));
+app.use("/api/simulate", require("./routes/api/Simulations"));
 
 // Catch all for 404
 app.all("*", (req, res) => {
