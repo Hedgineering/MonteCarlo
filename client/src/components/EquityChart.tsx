@@ -51,6 +51,12 @@ const EquityChart: React.FC<EquityChartProps> = ({ data }) => {
         },
       },
     },
+    plugins: {
+      legend: {
+        display: false
+      },
+    }
+    
   };
 
   return <Line data={chartData} options={chartOptions} />;
