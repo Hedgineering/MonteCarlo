@@ -5,25 +5,30 @@ const {
 
 //inputs: how many days to predict, historical data
 const postSimulations = async (req, res) => {
-  if (req.body.historicalData!=null) {
-    let prediction;
-    if(req.body.daysToPredict==null){ //predict one day only
-        prediction=nextPrice(req.body.historicalData);
-        res.status(200).json({result: prediction, message: "prediction posted"}); 
+  let startEquity=req.body.startEquity;
+  const winProbability=req.body.winProbability;
+  const winLossRelation=req.body.winLossRelation;
+  const riskPercent=req.body.riskPercent;
+  const numberTrades=req.body.numberTrades;
+  const numberSimulations=req.body.numberSimulations;
+  let notNull=startEquity!=null&&winProbability!=null&&winLossRelation!=null&&numberTrades!=null&&numberSimulations!=null&&riskPercent!=null;
+  let simulationResults=Array(numberSimulations).fill().map(() => Array(numberTrades).fill(startEquity));
+  if (notNull) {
+    for(let i=0;i<numberSimulations;i++){
+      let simulationEquity=startEquity;
+      for(let j=0;j<numberTrades;j++){
+        let equityChange=simulationEquity*(riskPercent/100);
+        let winChance=Math.floor(Math.random()*100);
+        if(winChance<winProbability){
+          simulationEquity+= equityChange*winLossRelation;
+        } else {
+          simulationEquity-= equityChange;
+        }
+        simulationEquity=Math.round((simulationEquity + Number.EPSILON) * 100) / 100;
+        simulationResults[i][j]=simulationEquity;
+      }
     }
-
-    //put historical data into an array
-    //use historical data to predict future cost
-    //create super list that will continue to predict using previously predicted data until time desired.
-    let historicalData=req.body.historicalData;
-    let predictedPrices=[];
-    let numDaysPredict=req.body.daysToPredict;
-    for(let i=0;i<numDaysPredict;i++){
-        prediction=nextPrice(historicalData);
-        predictedPrices.push(prediction);
-        historicalData.push(prediction);
-    }
-    res.status(200).json({result: predictedPrices, message: "predictions posted"});
+    res.status(200).json({result: simulationResults, message: "predictions posted"});
   } else {
     res
       .status(404)
