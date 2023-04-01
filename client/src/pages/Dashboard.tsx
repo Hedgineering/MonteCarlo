@@ -8,27 +8,20 @@ import SimulationForm from '../components/SimulationForm';
 export default function Dashboard() {
   const [data, setData] = useState<number[][]>([]);
 
-  const smallData  : number[][] = JSON.parse(JSON.stringify(sampleData))["small"];
-  const mediumData : number[][] = JSON.parse(JSON.stringify(sampleData))["medium"];
-  const largeData  : number[][] = JSON.parse(JSON.stringify(sampleData))["large"];
-  const xlargeData : number[][] = JSON.parse(JSON.stringify(sampleData))["xlarge"];
+  // const smallData  : number[][] = JSON.parse(JSON.stringify(sampleData))["small"];
+  // const mediumData : number[][] = JSON.parse(JSON.stringify(sampleData))["medium"];
+  // const largeData  : number[][] = JSON.parse(JSON.stringify(sampleData))["large"];
+  // const xlargeData : number[][] = JSON.parse(JSON.stringify(sampleData))["xlarge"];
 
   return (
     <Container>
       <h2 className="text-center">Basic Simulation</h2>
       <SimulationForm setData={setData} />
 
-      <h2 className="text-center">Small Equity Chart</h2>
-      <EquityChart data={smallData} />
+      {/* Show Chart if data is filled */}
 
-      <h2 className="text-center">Medium Equity Chart</h2>
-      <EquityChart data={mediumData} />
+      {data.length > 0 && <EquityChart data={data} />}
 
-      <h2 className="text-center">Large Equity Chart</h2>
-      <EquityChart data={largeData} />
-
-      <h2 className="text-center">X-Large Equity Chart</h2>
-      <EquityChart data={xlargeData} />
     </Container>
   );
 }
