@@ -9,6 +9,7 @@ import {
 import Dashboard from "./pages/Dashboard";
 import NavHeader from "./components/NavHeader";
 import About from "./pages/About";
+import PageNotFound from "./pages/PageNotFound";
 
 const App: React.FC = () => {
   const [isReady, setIsReady] = useState(false);
@@ -26,6 +27,7 @@ const App: React.FC = () => {
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Dashboard />} />
         <Route path="about" element={<About />} />
+        <Route path="*" element={<PageNotFound />} />
       </Route>
     )
   );
