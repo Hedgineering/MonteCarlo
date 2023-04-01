@@ -3,7 +3,30 @@ const {
     nextPrice
 } = require("../helpers/formulas.js");
 
-//inputs: how many days to predict, historical data
+/**
+ * Takes request with desired start equity, win probability, win loss relation,
+ * equity risk percent, number of trades and number of simulations. 
+ * 
+ * Expects:
+ * ```json
+ * { "startEquity": int, "winProbability": int, "winLossRelation": float, "numberTrades": int, "numberSimulations": int, "riskPercent": int}
+ * ```
+ * 
+ * startEquity should be an int, required
+ * 
+ * winProbability should be an int between 1 and 100 percent, required
+ * 
+ * winLossRelation should be a float ratio of percent returned : percent lost (ex. 2 you win twice the amount you risk or 0.5 you win half the amount you risk), required
+ * 
+ * numberTrades should be an int, required
+ * 
+ * numberSimulation should be an int, required
+ * 
+ * riskPercent should be an int, required
+ * 
+ * @param req - HTTP Request
+ * @param res - HTTP Response
+ */
 const postSimulations = async (req, res) => {
   let startEquity=req.body.startEquity;
   const winProbability=req.body.winProbability;
