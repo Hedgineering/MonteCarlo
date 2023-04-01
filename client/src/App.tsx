@@ -1,8 +1,14 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState, useEffect } from 'react'
-import RootLayout from './layouts/RootLayout';
-import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
-import Dashboard from './pages/Dashboard';
+import { useState, useEffect, StrictMode } from "react";
+import RootLayout from "./layouts/RootLayout";
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import NavHeader from "./components/NavHeader";
+import About from "./pages/About";
 
 const App: React.FC = () => {
   const [isReady, setIsReady] = useState(false);
@@ -19,13 +25,12 @@ const App: React.FC = () => {
     createRoutesFromElements(
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Dashboard />} />
+        <Route path="about" element={<About />} />
       </Route>
     )
   );
 
-  return (
-    <RouterProvider router={router} />
-  );
+  return <RouterProvider router={router} />;
 };
 
-export default App
+export default App;

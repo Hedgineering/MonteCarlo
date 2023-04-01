@@ -1,5 +1,6 @@
 import { Box, Flex, Link, Text } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
+import NavHeader from "../components/NavHeader";
 
 const RootLayout: React.FC = () => {
   return (
@@ -7,17 +8,8 @@ const RootLayout: React.FC = () => {
       {/* Header */}
       <Box
         as="header"
-        py={4}
-        px={8}
-        borderBottomWidth="1px"
-        borderBottomColor="gray.200"
       >
-        <Flex justifyContent="space-between" alignItems="center">
-          <Text fontSize="xl" fontWeight="bold">
-            Monte Carlo
-          </Text>
-          <Link href="/about">About</Link>
-        </Flex>
+        <NavHeader />
       </Box>
 
       {/* Main content */}
@@ -28,6 +20,7 @@ const RootLayout: React.FC = () => {
       {/* Footer */}
       <Box
         as="footer"
+        mt={8}
         py={4}
         px={8}
         borderTopWidth="1px"
