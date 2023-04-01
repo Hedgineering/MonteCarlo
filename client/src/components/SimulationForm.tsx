@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
+import { SimulationStatistics } from "../pages/Dashboard";
 
 type SimulationFormProps = {
   setData: React.Dispatch<React.SetStateAction<number[][]>>;
+  setStatistics: React.Dispatch<React.SetStateAction<SimulationStatistics>>;
 };
 
-const SimulationForm: React.FC<SimulationFormProps> = ({ setData }) => {
+const SimulationForm: React.FC<SimulationFormProps> = ({ setData, setStatistics }) => {
   const [startEquity, setStartEquity] = useState("");
   const [winProbability, setWinProbability] = useState("");
   const [winLossRelation, setWinLossRelation] = useState("");
@@ -17,7 +19,7 @@ const SimulationForm: React.FC<SimulationFormProps> = ({ setData }) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const response = await fetch("http://localhost:5000/api/simulate", {
+    const response = await fetch("http://localhost:5001/api/simulate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,14 +28,16 @@ const SimulationForm: React.FC<SimulationFormProps> = ({ setData }) => {
         startEquity: parseFloat(startEquity),
         winProbability: parseFloat(winProbability),
         winLossRelation: parseFloat(winLossRelation),
-        numTrades: parseInt(numTrades),
-        numSimulations: parseInt(numSimulations),
-        riskPerTrade: parseFloat(riskPerTrade),
+        numberTrades: parseInt(numTrades),
+        numberSimulations: parseInt(numSimulations),
+        riskPercent: parseFloat(riskPerTrade),
       }),
     });
 
     const responseData = await response.json();
-    setData(responseData.results);
+    console.log(responseData.result)
+    setData(responseData.result);
+    setStatistics(responseData.statistics);
   };
 
   return (
