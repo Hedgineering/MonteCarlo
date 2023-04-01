@@ -28,7 +28,9 @@ const postSimulations = async (req, res) => {
         simulationResults[i][j]=simulationEquity;
       }
     }
-    res.status(200).json({result: simulationResults, message: "predictions posted"});
+    res
+      .status(200)
+      .json({ result: simulationResults, message: "predictions posted" });
   } else {
     res
       .status(404)
