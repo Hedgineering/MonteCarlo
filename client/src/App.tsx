@@ -1,34 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useState, useEffect, StrictMode } from "react";
+import RootLayout from "./layouts/RootLayout";
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import NavHeader from "./components/NavHeader";
+import About from "./pages/About";
+import PageNotFound from "./pages/PageNotFound";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => {
+  const [isReady, setIsReady] = useState(false);
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
-}
+  useEffect(() => {
+    setIsReady(true);
+  }, []);
 
-export default App
+  if (!isReady) {
+    return <div>Loading...</div>;
+  }
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<RootLayout />}>
+        <Route index element={<Dashboard />} />
+        <Route path="about" element={<About />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Route>
+    )
+  );
+
+  return <RouterProvider router={router} />;
+};
+
+export default App;
