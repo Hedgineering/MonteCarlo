@@ -12,8 +12,8 @@ const getSum = async (req, res) => {
     const a = Number(req.query.a);
     const b = Number(req.query.b);
 
-    console.log(req)
-    console.log(`a = ${a} ; and b = ${b}`);
+    // console.log(req)
+    // console.log(`a = ${a} ; and b = ${b}`);
     const sum = a + b;
     return res.status(200).json({ result: sum, message: "Success" });
   } catch (e) {

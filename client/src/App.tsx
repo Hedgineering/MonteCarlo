@@ -26,8 +26,7 @@ const App: React.FC = () => {
   if(!serverIp || serverIp === "http://localhost:5002") {
     console.log("Server IP not set. Using default: http://localhost:5002; Will not work in production.");
   } else {
-    console.log("Server IP set to: " + serverIp);
-    console.log("Granted env: " + import.meta.env);
+    console.log("Granted env");
   }
 
   const router = createBrowserRouter(

@@ -21,7 +21,7 @@ const getTickerPage = async (req, res) => {
  */
 const getHistoricalData = async (req, res) => {
   try {
-    console.log(req.params);
+    // console.log(req.params);
     res.status(200).json({ result: true, message: "Success" });
   } catch (e) {
     console.log(e.message);
