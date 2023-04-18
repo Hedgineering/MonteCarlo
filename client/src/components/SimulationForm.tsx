@@ -39,6 +39,8 @@ const SimulationForm: React.FC<SimulationFormProps> = ({ setData, setStatistics,
       }),
     });
 
+    console.log(response)
+
     const responseData = await response.json();
     console.log(responseData.result)
     setData(responseData.result);
