@@ -1,9 +1,4 @@
 [[redirects]]
-  from = "/api/simulate"
-  to = "https://45.33.91.193:5001/api/simulate"
-  status = 200
-
-[[redirects]]
   from = "/about"
   to = "/index.html"
   status = 200
