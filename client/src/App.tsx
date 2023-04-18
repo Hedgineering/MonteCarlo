@@ -22,7 +22,7 @@ const App: React.FC = () => {
     return <div>Loading...</div>;
   }
 
-  const serverIp : string = import.meta.env.VITE_SERVER_IP|| "http://localhost:5002";
+  const serverIp : string = import.meta.env.VITE_SERVER_IP|| "45.33.91.193:5001";
   if(!serverIp || serverIp === "http://localhost:5002") {
     console.log("Server IP not set. Using default: http://localhost:5002; Will not work in production.");
   } else {
