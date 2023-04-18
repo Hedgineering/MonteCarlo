@@ -1,5 +1,4 @@
 .env
-*/.env
 
 # Mac Finder Preview Cache
 .DS_Store
