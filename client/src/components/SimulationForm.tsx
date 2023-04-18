@@ -21,7 +21,7 @@ const SimulationForm: React.FC<SimulationFormProps> = ({ setData, setStatistics,
     event.preventDefault();
 
     console.log("sending request...");
-    const destination = `http://${serverIp}/api/simulate`;
+    const destination = `https://ruha-monte-carlo.netlify.app/api/simulate`;
     console.log("sending request to " + destination)
 
     const response = await fetch(destination, {
