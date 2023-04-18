@@ -21,8 +21,10 @@ const SimulationForm: React.FC<SimulationFormProps> = ({ setData, setStatistics,
     event.preventDefault();
 
     console.log("sending request...");
+    const destination = `${serverIp}/api/simulate`;
+    console.log("sending request to " + destination)
 
-    const response = await fetch(`${serverIp}/api/simulate`, {
+    const response = await fetch(destination, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
