@@ -41,7 +41,12 @@ export interface SimulationStatistics {
   maxConsecutiveLoser: number;
 }
 
-export default function Dashboard() {
+// Define a type for the props of the Dashboard component, which is just the serverIp
+type DashboardProps = {
+  serverIp: string;
+}
+
+export default function Dashboard({serverIp}: DashboardProps) {
   const [data, setData] = useState<number[][]>([]);
   const [statistics, setStatistics] = useState<SimulationStatistics>({} as SimulationStatistics);
 
@@ -50,10 +55,11 @@ export default function Dashboard() {
   // const largeData  : number[][] = JSON.parse(JSON.stringify(sampleData))["large"];
   // const xlargeData : number[][] = JSON.parse(JSON.stringify(sampleData))["xlarge"];
 
+
   return (
     <Container>
       <h2 className="text-center">Basic Simulation</h2>
-      <SimulationForm setData={setData} setStatistics={setStatistics} />
+      <SimulationForm setData={setData} setStatistics={setStatistics} serverIp={serverIp} />
 
       {/* Show Chart if data is filled */}
       {data.length > 0 && <EquityChart data={data} />}

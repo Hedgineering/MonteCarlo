@@ -22,10 +22,18 @@ const App: React.FC = () => {
     return <div>Loading...</div>;
   }
 
+  const serverIp : string = import.meta.env.VITE_SERVER_IP|| "http://localhost:5002";
+  if(!serverIp || serverIp === "http://localhost:5002") {
+    console.log("Server IP not set. Using default: http://localhost:5002; Will not work in production.");
+  } else {
+    console.log("Server IP set to: " + serverIp);
+    console.log("Granted env: " + import.meta.env);
+  }
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<RootLayout />}>
-        <Route index element={<Dashboard />} />
+        <Route index element={<Dashboard serverIp={serverIp}/>} />
         <Route path="about" element={<About />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>

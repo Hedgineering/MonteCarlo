@@ -6,9 +6,10 @@ import { SimulationStatistics } from "../pages/Dashboard";
 type SimulationFormProps = {
   setData: React.Dispatch<React.SetStateAction<number[][]>>;
   setStatistics: React.Dispatch<React.SetStateAction<SimulationStatistics>>;
+  serverIp: string;
 };
 
-const SimulationForm: React.FC<SimulationFormProps> = ({ setData, setStatistics }) => {
+const SimulationForm: React.FC<SimulationFormProps> = ({ setData, setStatistics, serverIp }) => {
   const [startEquity, setStartEquity] = useState("");
   const [winProbability, setWinProbability] = useState("");
   const [winLossRelation, setWinLossRelation] = useState("");
@@ -19,7 +20,9 @@ const SimulationForm: React.FC<SimulationFormProps> = ({ setData, setStatistics 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const response = await fetch("http://localhost:5001/api/simulate", {
+    console.log("sending request...");
+
+    const response = await fetch("http://localhost:5002/api/simulate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
