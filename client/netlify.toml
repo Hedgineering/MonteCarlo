@@ -1,4 +1,9 @@
 [[redirects]]
+  from = "/api/*"
+  to = "http://45.33.91.193:5001/api/:splat"
+  status = "200!"
+
+[[redirects]]
   from = "/about"
   to = "/index.html"
   status = 200
